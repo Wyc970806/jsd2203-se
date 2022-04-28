@@ -32,7 +32,7 @@ public class WriteStringDemo {
             UTF-8
             英文占1字节，中文占3字节
          */
-        String line = "一给窝里giao~~\r\n";
+        String line = "一给窝里giao~~";
         byte[] data = line.getBytes(StandardCharsets.UTF_8);
         fos.write(data);
 
