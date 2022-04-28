@@ -19,6 +19,11 @@ public class WriteStringDemo {
         String line = "一给窝里giao~~";
         byte[] data = line.getBytes(StandardCharsets.UTF_8);
         fos.write(data);
+
+        line = "我太难了~~~";
+        data = line.getBytes(StandardCharsets.UTF_8);
+        fos.write(data);
+
         System.out.println("写出完毕!");
         fos.close();
 
