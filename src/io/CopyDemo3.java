@@ -24,8 +24,10 @@ public class CopyDemo3 {
         BufferedInputStream bis = new BufferedInputStream(fis);
 
         FileOutputStream fos = new FileOutputStream("setup_cp.exe");
-        BufferedOutputStream bos = new BufferedOutputStream(fos);
-
+        //缓冲流内部缓冲区默认为8kb
+//        BufferedOutputStream bos = new BufferedOutputStream(fos);
+        //重载的构造器可以自行指定缓冲区大小
+        BufferedOutputStream bos = new BufferedOutputStream(fos,1024*10);
         int d = 0;
         long start = System.currentTimeMillis();
         while((d = bis.read()) != -1) {
@@ -33,7 +35,6 @@ public class CopyDemo3 {
         }
         long end = System.currentTimeMillis();
         System.out.println("复制完毕!耗时:"+(end-start)+"ms");
-
         bis.close();
         bos.close();
     }
