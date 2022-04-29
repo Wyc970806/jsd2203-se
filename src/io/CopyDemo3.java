@@ -9,9 +9,15 @@ package io;
  * 实际开发中，我们总是会串联一组高级流到一个低级流上，以流水线式的加工处理完成
  * 读写的操作，这个过程也成为"流的链接"
  *
+ * 缓冲流:
+ * java.io.BufferedInputStream和BufferedOutputStream
+ * 它们同样继承自InputStream和OutputStream
  *
- *
+ * 缓冲流的功能是提高读写效率。
  *
  */
 public class CopyDemo3 {
+    public static void main(String[] args) {
+
+    }
 }
