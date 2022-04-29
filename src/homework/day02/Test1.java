@@ -16,19 +16,26 @@ public class Test1 {
         FileOutputStream fos = new FileOutputStream("note.txt");
         Scanner scanner = new Scanner(System.in);
 
-        while(true) {
-            String line = scanner.nextLine();//获取用户输入的一行字符串
-            /*
-                当我们使用字符串的字面量与一个字符串变量进行equals判断时，应当
-                写为字面量equals变量，避免空指针异常的发生。
-             */
-            if("exit".equals(line)){
-//            if(line.equals("exit")){
-                break;
-            }
-            byte[] data = line.getBytes(StandardCharsets.UTF_8);
-            fos.write(data);
+//        while(true) {
+//            String line = scanner.nextLine();//获取用户输入的一行字符串
+//            /*
+//                当我们使用字符串的字面量与一个字符串变量进行equals判断时，应当
+//                写为字面量equals变量，避免空指针异常的发生。
+//             */
+//            if("exit".equals(line)){
+////            if(line.equals("exit")){
+//                break;
+//            }
+//            byte[] data = line.getBytes(StandardCharsets.UTF_8);
+//            fos.write(data);
+//        }
+
+        String line;
+        while(!("exit".equals(line = scanner.nextLine()))) {
+            fos.write(line.getBytes(StandardCharsets.UTF_8));
         }
+
+
         System.out.println("再见!");
         fos.close();
 
