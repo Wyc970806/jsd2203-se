@@ -1,5 +1,6 @@
 package io;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Arrays;
  * 序列化:将一个对象按照其结构转化为一组字节的过程
  * 反序列化:将一组字节还原为一个对象的过程
  */
-public class Person {
+public class Person implements Serializable {
     private String name;//名字
     private int age;//年龄
     private String gender;//性别
