@@ -26,7 +26,6 @@ public class FlushDemo {
             缓冲流的flush做实际操作。
          */
 //        bos.flush();//冲
-
         bos.close();
 
     }
