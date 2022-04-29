@@ -1,5 +1,7 @@
 package io;
 
+import java.io.*;
+
 /**
  * JAVA将流分为了两类:节点流与处理流
  * 节点流:又称为低级流，是实际链接程序与另一端的"管道"，负责实际读写数据的流。
@@ -17,7 +19,22 @@ package io;
  *
  */
 public class CopyDemo3 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        FileInputStream fis = new FileInputStream("setup.exe");
+        BufferedInputStream bis = new BufferedInputStream(fis);
 
+        FileOutputStream fos = new FileOutputStream("setup_cp.exe");
+        BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+        int d = 0;
+        long start = System.currentTimeMillis();
+        while((d = bis.read()) != -1) {
+            bos.write(d);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("复制完毕!耗时:"+(end-start)+"ms");
+
+        bis.close();
+        bos.close();
     }
 }
