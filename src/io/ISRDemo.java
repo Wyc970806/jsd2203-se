@@ -21,7 +21,12 @@ public class ISRDemo {
 
          */
 //        int d = isr.read();
-
+        /*
+            osw.txt UTF-8编码的
+            11101000 10001100 10000011
+                    V 将utf-8编码转换为unicode2字节返回
+            10000011 00000011
+         */
         int d;
         while((d = isr.read())!=-1) {
             System.out.print((char) d);
