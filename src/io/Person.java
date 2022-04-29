@@ -22,12 +22,19 @@ public class Person implements Serializable {
         如果不指定序列化版本号，那么对象在序列化时对象输出流会根据当前类结构生成
         一个版本号，但是缺点是只要当前类结构改变了，版本号也会一同变化，这会导致
         之前序列化的对象都无法反序列化成功，会抛出异常:java.io.InvalidClassException
+
+        建议通读文档
+        Serializable接口的描述
      */
     public static final long serialVersionUID = 1L;
     private String name;//名字
     private int age;//年龄
     private String gender;//性别
-    private String[] otherInfo;//其它信息
+    /*
+        被关键字:transient修饰的属性，对象序列化时该属性的值会被忽略。
+        忽略不必要的属性可以达到的对象序列化"瘦身"的目的,减小不必要的开销。
+     */
+    private transient String[] otherInfo;//其它信息
 
 //    private int salary;
 
