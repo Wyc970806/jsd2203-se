@@ -15,10 +15,21 @@ import java.util.Arrays;
  * 反序列化:将一组字节还原为一个对象的过程
  */
 public class Person implements Serializable {
+    /*
+        当一个类实现了可序列化接口后，建议明确添加序列化版本号。
+        这样当我们进行对象的反序列化时，如果当前类的结构改变了(比如新添加了属性)
+        由于版本号没有改变，那么反序列化就可以成功。
+        如果不指定序列化版本号，那么对象在序列化时对象输出流会根据当前类结构生成
+        一个版本号，但是缺点是只要当前类结构改变了，版本号也会一同变化，这会导致
+        之前序列化的对象都无法反序列化成功，会抛出异常:java.io.InvalidClassException
+     */
+    public static final long serialVersionUID = 1L;
     private String name;//名字
     private int age;//年龄
     private String gender;//性别
     private String[] otherInfo;//其它信息
+
+//    private int salary;
 
     public Person(){}
 

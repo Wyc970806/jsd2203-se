@@ -17,6 +17,12 @@ public class OISDemo {
             Object readObject()
             作用是先通过其链接的流读取一组字节，然后将其还原为对应的java对象并返回。
             返回时统一以Object形式返回，所以实际接收后可造型为实际类型去使用。
+
+            在进行反序列化时如果抛出下面异常:
+            java.io.InvalidClassException
+            原因:
+            读取到的对象的序列化版本号与当前类的序列化版本号不一致导致的。
+
          */
         Person person = (Person)ois.readObject();
         /*
