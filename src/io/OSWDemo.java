@@ -32,8 +32,6 @@ public class OSWDemo {
         /*
             转换流通常需要传入第二个参数用来明确字符集。这样通过当前流写出的字符
             都会按照该字符集转换为字节后写出
-
-            16：45回来
          */
         OutputStreamWriter osw = new OutputStreamWriter(
                 fos,StandardCharsets.UTF_8);
