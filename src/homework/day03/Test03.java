@@ -1,4 +1,10 @@
 package homework.day03;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.Scanner;
+
 /**
  * 设计一个类:User
  * 里面有四个属性:String name,String pwd,String nick,int age
@@ -25,5 +31,36 @@ package homework.day03;
  *
  */
 public class Test03 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("欢迎注册");
+        System.out.println("请输入用户名:");
+        String name = scanner.nextLine();
 
+//        if(name.matches("[0-9a-zA-Z_]+")){
+        if(!name.matches("\\w+")){
+            System.out.println("用户名格式有误，请重新注册");
+            return;
+        }
+
+        System.out.println("请输入密码:");
+        String pwd = scanner.nextLine();
+        System.out.println("请输入昵称:");
+        String nick = scanner.nextLine();
+        System.out.println("请输入年龄:");
+        int age = scanner.nextInt();
+
+        User user = new User(name,pwd,nick,age);
+
+        try (
+                FileOutputStream fos = new FileOutputStream(name+".obj");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+        ){
+            oos.writeObject(user);
+            System.out.println("注册完毕!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

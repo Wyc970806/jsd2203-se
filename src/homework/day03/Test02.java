@@ -1,6 +1,6 @@
 package homework.day03;
 
-import java.io.FileNotFoundException;
+import java.io.*;
 
 /**
  * 改正下面程序的错误
@@ -10,17 +10,27 @@ import java.io.FileNotFoundException;
  *
  */
 public class Test02 {
-	public static void main(String[] args) throws FileNotFoundException {
-//			FileInputStream fis = new FileInputStream("test.txt");
+	public static void main(String[] args) throws IOException {
+		FileInputStream fis = new FileInputStream("test.txt");
 //		BufferedInputStream bis = new BuffereddInputStream(fis);
-//		
-//	FileOutputStream fos = new FileOutputStream("test_cp.txt");
-//			BufferedInputStream bos = new BufferedOutputStream(fos);
-//			
-//	int d =0;
-//	if((d = bis.read())==-1) {
-//		bos.wirte(d);
-//	}	
-//	System.out.println("复制完毕!");
+		BufferedInputStream bis = new BufferedInputStream(fis);
+
+		FileOutputStream fos = new FileOutputStream("test_cp.txt");
+//		BufferedInputStream bos = new BufferedOutputStream(fos);
+
+		BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+		int d = 0;
+		//1:判断应是!=-1
+		//2:应该用循环不是分支
+//		if ((d = bis.read()) == -1) {
+
+		while ((d = bis.read()) != -1) {
+			//方法名没有拼对
+//			bos.wirte(d);
+
+			bos.write(d);
+		}
+		System.out.println("复制完毕!");
 	}
 }

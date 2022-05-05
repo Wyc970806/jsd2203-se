@@ -1,4 +1,7 @@
 package homework.day03;
+
+import java.io.*;
+
 /**
  * 将当前目录下的所有obj文件获取到，并进行
  * 反序列化后输出每个用户的信息(直接输出反序
@@ -7,7 +10,35 @@ package homework.day03;
  *
  */
 public class Test04 {
+    public static void main(String[] args) {
+        //1扫描当前目录下的所有obj文件
+        File dir = new File(".");//当前目录
+//         File[] subs = dir.listFiles(f->f.getName().endsWith(".obj"));
+        FileFilter filter = new FileFilter() {
+            public boolean accept(File file) {
+                return file.getName().endsWith(".obj");
+            }
+        };
+        File[] subs = dir.listFiles(filter);
 
+        //2将每个obj文件进行反序列化得到里面保存的User对象
+        for(int i=0;i<subs.length;i++){
+            File sub = subs[i];
+            try (
+                    FileInputStream fis = new FileInputStream(sub);
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+            ){
+                Object obj = ois.readObject();
+                if(obj instanceof User){
+                    User user = (User)obj;
+                    System.out.println(user);
+                }
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }
 
 /*
