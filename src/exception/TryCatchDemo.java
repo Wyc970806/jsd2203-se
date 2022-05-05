@@ -10,4 +10,17 @@ package exception;
  * }
  */
 public class TryCatchDemo {
+    public static void main(String[] args) {
+        System.out.println("程序开始了...");
+
+        String str = null;
+        System.out.println(str.length());
+
+        System.out.println("程序结束了...");
+    }
 }
+
+
+
+
+
