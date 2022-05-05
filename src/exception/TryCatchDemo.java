@@ -12,10 +12,18 @@ package exception;
 public class TryCatchDemo {
     public static void main(String[] args) {
         System.out.println("程序开始了...");
-
-        String str = null;
-        System.out.println(str.length());
-
+        //try语句块不可以单独写，后面必须跟catch或finally
+        try {
+            String str = null;
+            //出现空指针后JVM会实例化一个空指针异常实例并抛出
+            System.out.println(str.length());
+        /*
+            如果catch捕获的异常类型是try语句块中出现的错误，JVM就会将异常传
+            给变量e,并执行该catch块来来完成补救措施
+         */
+        }catch(NullPointerException e){
+            System.out.println("出现了空指针异常!");
+        }
         System.out.println("程序结束了...");
     }
 }
