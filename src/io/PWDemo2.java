@@ -14,6 +14,11 @@ public class PWDemo2 {
         //在转换流上加上字符集，可以按照指定字符集写出。
         OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
         BufferedWriter bw = new BufferedWriter(osw);
+        /*
+            当PrintWriter第一个参数为流时，我们就支持再传入一个boolean值参数，如果该值为true则
+            打开了自动行刷新功能。每当我们调用println方法后就会自动flush一次
+            注意:调用print方法并不会自动flush！！！！！！！
+         */
         PrintWriter pw = new PrintWriter(bw,true);
 
 //        FileOutputStream fos = new FileOutputStream("pw.txt",true);
