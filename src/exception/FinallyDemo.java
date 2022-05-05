@@ -14,6 +14,7 @@ public class FinallyDemo {
 //            String str = null;
             String str = "abc";
             System.out.println(str.length());
+            return;
         }catch(Exception e){
             System.out.println("出现了错误");
         }finally{
