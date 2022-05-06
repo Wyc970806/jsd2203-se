@@ -2,6 +2,7 @@ package socket;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 /**
  * 聊天室服务端
@@ -36,9 +37,26 @@ public class Server {
             e.printStackTrace();
         }
     }
-    public void start(){
 
+    public void start(){
+        try {
+            System.out.println("等待客户端连接...");
+            /*
+                ServerSocket的方法:
+                Socket accept()
+                该方法是一个阻塞方法，调用后开始等待客户端的连接，一旦一个客户端连接了
+                accept方法会立即返回一个Socket实例，通过这个Socket可以与连接的客户
+                端进行交互。
+                多次调用accept可以接受多个客户端的连接。理解为是总机"接电话"的操作。
+             */
+            Socket socket = serverSocket.accept();
+            System.out.println("一个客户端连接了");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
     public static void main(String[] args) {
         Server server = new Server();
         server.start();
