@@ -30,7 +30,9 @@ public class Client {
                 并且这个构造器实例化Socket的过程就是与服务端建立连接的过程，如果连接
                 失败会抛出异常.
              */
-            socket = new Socket("",0);
+            System.out.println("正在连接服务端...");//11:40回来继续
+            socket = new Socket("localhost",8088);
+            System.out.println("已连接服务端!");
         } catch (IOException e) {
             e.printStackTrace();
         }
