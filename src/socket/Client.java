@@ -68,10 +68,19 @@ public class Client {
                 pw.println(line);//将输入的内容发送给服务端
             }
 
-
-
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            //与服务端断开连接
+            try {
+                /*
+                    Socket提供了close方法，该方法内部会将通过它获取的输入流和输出流
+                    全部关闭，同时还会跟远端计算机做最后的4次挥手动作(TCP协议断开的操作)
+                 */
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
