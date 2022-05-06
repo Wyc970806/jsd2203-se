@@ -19,9 +19,10 @@ public class ThrowDemo {
                 实际情况应当结合实际的业务场景分析决定。
              */
             p.setAge(10000);//满足语法不满足业务
-        } catch (Exception e) {
+        } catch (IllegalAgeException e) {
             e.printStackTrace();
         }
+
         System.out.println("我今年:"+p.getAge()+"岁");
     }
 }
