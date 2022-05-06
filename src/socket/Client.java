@@ -1,8 +1,8 @@
 package socket;
 
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 /**
  * 聊天室的客户端
@@ -48,9 +48,18 @@ public class Client {
                 Socket提供的方法:
                 OutputStream getOutputStream()
                 通过socket获取一个字节输出流，使用该输出流写出的字节数据会发送给
-                建立连接的远端计算机。
+                建立连接的远端计算机。而对方也可以通过建立连接的Socket获取输入流
+                读取到我们写出的字节。
              */
+
+            //低级流，通过该流写出的字节就发送给了远端计算机
             OutputStream out = socket.getOutputStream();
+            OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);
+            BufferedWriter bw = new BufferedWriter(osw);
+            PrintWriter pw = new PrintWriter(osw,true);
+
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
