@@ -66,6 +66,11 @@ public class Server {
             BufferedReader br = new BufferedReader(isr);
 
             String message;
+            /*
+                使用缓冲字符输入流读取客户端发送过来一行字符串的操作，可能会因为客户端
+                的异常断开而抛出异常:
+                java.net.SocketException: Connection reset
+             */
             while((message = br.readLine())!=null) {
                 System.out.println("客户端说:" + message);
             }
