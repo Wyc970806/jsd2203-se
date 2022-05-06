@@ -3,6 +3,7 @@ package socket;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 /**
  * 聊天室的客户端
@@ -58,8 +59,14 @@ public class Client {
             BufferedWriter bw = new BufferedWriter(osw);
             PrintWriter pw = new PrintWriter(bw,true);
 
-            pw.println("你好服务端!!");
-
+            Scanner scanner = new Scanner(System.in);
+            while(true){
+                String line = scanner.nextLine();//获取控制台输入的一行字符串
+                if("exit".equalsIgnoreCase(line)){
+                    break;//停止循环
+                }
+                pw.println(line);//将输入的内容发送给服务端
+            }
 
 
 
