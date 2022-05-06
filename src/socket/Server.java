@@ -31,7 +31,6 @@ public class Server {
                 端口的选择:范围是0-65535之间的整数。但是实际开发中前6000不建议选取
                 因为密集绑定了系统应用和流行的应用程序。建议8000以后的端口。
              */
-            //15：00回来继续。网络还有问题的同学优先找项目经理解决。
             serverSocket = new ServerSocket(8088);
             System.out.println("服务端启动完毕");
         } catch (IOException e) {

@@ -1,6 +1,7 @@
 package socket;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.Socket;
 
 /**
@@ -42,6 +43,18 @@ public class Client {
     }
 
     public void start(){
+        try {
+            /*
+                Socket提供的方法:
+                OutputStream getOutputStream()
+                通过socket获取一个字节输出流，使用该输出流写出的字节数据会发送给
+                建立连接的远端计算机。
+             */
+            OutputStream out = socket.getOutputStream();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
