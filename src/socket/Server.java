@@ -27,6 +27,8 @@ public class Server {
                 异常:java.net.BindException:address already in use
                   即:地址被占用异常
                   解决办法:换一个端口，或者将占用8088端口的程序进程杀死。
+                端口的选择:范围是0-65535之间的整数。但是实际开发中前6000不建议选取
+                因为密集绑定了系统应用和流行的应用程序。建议8000以后的端口。
              */
             serverSocket = new ServerSocket(8088);
             System.out.println("服务端启动完毕");
