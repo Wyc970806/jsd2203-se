@@ -29,8 +29,11 @@ public class Client {
 
                 并且这个构造器实例化Socket的过程就是与服务端建立连接的过程，如果连接
                 失败会抛出异常.
+                如果指定的服务端地址与端口不对，那么连接时会抛出异常:
+                java.net.ConnectException:Connection refused : connect
+
              */
-            System.out.println("正在连接服务端...");//11:40回来继续
+            System.out.println("正在连接服务端...");
             socket = new Socket("localhost",8088);
             System.out.println("已连接服务端!");
         } catch (IOException e) {
