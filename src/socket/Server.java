@@ -49,7 +49,8 @@ public class Server {
 
     public void start(){
         try {
-            System.out.println("等待客户端连接...");
+            while(true) {
+                System.out.println("等待客户端连接...");
             /*
                 ServerSocket的方法:
                 Socket accept()
@@ -58,28 +59,27 @@ public class Server {
                 端进行交互。
                 多次调用accept可以接受多个客户端的连接。理解为是总机"接电话"的操作。
              */
-            Socket socket = serverSocket.accept();
-            System.out.println("一个客户端连接了");
+                Socket socket = serverSocket.accept();
+                System.out.println("一个客户端连接了");
 
             /*
                 通过Socket的方法
                 InputStream getInputStream()
                 获取一个字节输入流，来读取远端计算机发送过来的字节
              */
-            InputStream in = socket.getInputStream();
-            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-            BufferedReader br = new BufferedReader(isr);
-
-            String message;
+                InputStream in = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+                BufferedReader br = new BufferedReader(isr);
+                String message;
             /*
                 使用缓冲字符输入流读取客户端发送过来一行字符串的操作，可能会因为客户端
                 的异常断开而抛出异常:
                 java.net.SocketException: Connection reset
              */
-            while((message = br.readLine())!=null) {
-                System.out.println("客户端说:" + message);
+                while ((message = br.readLine()) != null) {
+                    System.out.println("客户端说:" + message);
+                }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
