@@ -62,23 +62,11 @@ public class Server {
                 Socket socket = serverSocket.accept();
                 System.out.println("一个客户端连接了");
 
-            /*
-                通过Socket的方法
-                InputStream getInputStream()
-                获取一个字节输入流，来读取远端计算机发送过来的字节
-             */
-                InputStream in = socket.getInputStream();
-                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-                BufferedReader br = new BufferedReader(isr);
-                String message;
-            /*
-                使用缓冲字符输入流读取客户端发送过来一行字符串的操作，可能会因为客户端
-                的异常断开而抛出异常:
-                java.net.SocketException: Connection reset
-             */
-                while ((message = br.readLine()) != null) {
-                    System.out.println("客户端说:" + message);
-                }
+                //启动一个线程来处理与该客户端的交互
+                ClientHandler clientHandler = new ClientHandler(socket);
+                Thread t = new Thread(clientHandler);
+                t.start();
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -89,4 +77,40 @@ public class Server {
         Server server = new Server();
         server.start();
     }
+
+    /**
+     * 该线程任务负责与指定客户端交互
+     */
+    private class ClientHandler implements Runnable{
+        private Socket socket;
+
+        public ClientHandler(Socket socket){
+            this.socket = socket;
+        }
+
+        public void run(){
+            try{
+                /*
+                通过Socket的方法
+                InputStream getInputStream()
+                获取一个字节输入流，来读取远端计算机发送过来的字节
+             */
+                InputStream in = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+                BufferedReader br = new BufferedReader(isr);
+                String message;
+                /*
+                    使用缓冲字符输入流读取客户端发送过来一行字符串的操作，可能会因为客户端
+                    的异常断开而抛出异常:
+                    java.net.SocketException: Connection reset
+                 */
+                while ((message = br.readLine()) != null) {
+                    System.out.println("客户端说:" + message);
+                }
+            }catch(IOException e){
+
+            }
+        }
+    }
+
 }
