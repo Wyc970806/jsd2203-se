@@ -61,12 +61,10 @@ public class Server {
              */
                 Socket socket = serverSocket.accept();
                 System.out.println("一个客户端连接了");
-
                 //启动一个线程来处理与该客户端的交互
                 ClientHandler clientHandler = new ClientHandler(socket);
                 Thread t = new Thread(clientHandler);
                 t.start();
-
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -111,7 +109,6 @@ public class Server {
                     System.out.println(host + "说:" + message);
                 }
             }catch(IOException e){
-                //16:20回来继续
             }
         }
     }
