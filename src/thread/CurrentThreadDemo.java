@@ -13,7 +13,7 @@ public class CurrentThreadDemo {
             该方法可以获取运行这个方法的线程。
          */
         Thread main = Thread.currentThread();//主线程调用main方法就执行了这句话，方法就获取了主线程
-        System.out.println("主线程:"+main);
+        System.out.println("主线程:"+main);//线程重写了toString,格式:Thread[线程名字,优先级,线程组]
         dosome();//主线程执行dosome方法
 
     }
