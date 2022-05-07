@@ -19,12 +19,27 @@ public class ThreadDemo1 {
     public static void main(String[] args) {
         Thread t1 = new MyThread1();
         Thread t2 = new MyThread2();
-
+        /*
+            注意，启动线程是调用线程的start方法，而不能直接调用run方法!
+            当线程的start方法[调用完毕]后，一旦CPU开始执行这个线程的代码
+            就会自动调用run方法了。
+         */
         t1.start();
         t2.start();
 
     }
 }
+
+/**
+ * 这种创建线程的方式优点在于:
+ * 结构简单，便于使用匿名内部类创建
+ *
+ * 缺点:
+ * 1:直接继承Thread就无法再继承其它类了，这对实际开发中复用代码不利。
+ *   因为java中是单继承的。
+ * 2:直接重写run方法，将线程任务定义在了线程中，这导致线程与任务存在
+ *   一个必然的耦合关系，不利于线程重用。
+ */
 class MyThread1 extends Thread{//java.lang.Thread 线程
     public void run(){
         for(int i=0;i<1000;i++){
