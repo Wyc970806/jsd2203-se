@@ -83,9 +83,12 @@ public class Server {
      */
     private class ClientHandler implements Runnable{
         private Socket socket;
+        private String host;//记录客户端的地址信息
 
         public ClientHandler(Socket socket){
             this.socket = socket;
+            //通过socket获取远端计算机地址信息
+            host = socket.getInetAddress().getHostAddress();
         }
 
         public void run(){
@@ -105,10 +108,10 @@ public class Server {
                     java.net.SocketException: Connection reset
                  */
                 while ((message = br.readLine()) != null) {
-                    System.out.println("客户端说:" + message);
+                    System.out.println(host + "说:" + message);
                 }
             }catch(IOException e){
-
+                //16:20回来继续
             }
         }
     }
