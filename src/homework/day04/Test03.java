@@ -1,4 +1,7 @@
 package homework.day04;
+
+import java.io.*;
+
 /**
  * 扫描指定目录中的所有.java文件，并将内容全部输出到控制台
  * 
@@ -15,7 +18,35 @@ package homework.day04;
  *
  */
 public class Test03 {
+    public static void main(String[] args) {
+        //确定扫描的目录
+        File dir = new File("./src/io");
+        //获取该目录中所有名字以".java"结尾的子项
+        File[] subs = dir.listFiles(f->f.getName().endsWith(".java"));
 
+        //遍历数组,得到每一个文件
+        for(int i=0;i<subs.length;i++){
+            File sub = subs[i];
+            //利用课上BRDemo.java案例完成读取文件输出到控制台
+            try (
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader(
+                                    new FileInputStream(sub)
+                            )
+                    );
+            ){
+                String line;
+                while((line = br.readLine())!=null){
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+    }
 }
 
 /*

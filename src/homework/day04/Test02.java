@@ -1,4 +1,8 @@
 package homework.day04;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+
 /**
  * 完成一个转码工具。
  * 比如当前项目目录下有一个文本文件note.txt，字符串编码
@@ -27,7 +31,30 @@ package homework.day04;
  *
  */
 public class Test02 {
-	
+    public static void main(String[] args) {
+        try (
+                FileInputStream fis = new FileInputStream("./src/homework/day04/note.txt");
+                InputStreamReader isr = new InputStreamReader(fis,"GBK");
+                BufferedReader br = new BufferedReader(isr);
+
+                FileOutputStream fos = new FileOutputStream("./src/homework/day04/note_utf.txt");
+                OutputStreamWriter osw = new OutputStreamWriter(fos, StandardCharsets.UTF_8);
+                BufferedWriter bw = new BufferedWriter(osw);
+                PrintWriter pw = new PrintWriter(bw);
+
+        ){
+            String line;
+            while((line = br.readLine())!=null){
+                pw.println(line);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }
 /*
     提示代码:

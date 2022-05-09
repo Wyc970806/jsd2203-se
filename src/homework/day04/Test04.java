@@ -1,5 +1,8 @@
 package homework.day04;
 
+import java.io.*;
+import java.util.Scanner;
+
 /**
  * 改错
  * 
@@ -12,20 +15,31 @@ package homework.day04;
  */
 public class Test04 {
 	public static void main(String[] args) {
-//		FileInputStream fos = new FileInputStream("pw.txt");
-//		OutputStreamWriter osw = new OutputStreamWriter(fos,"UFT-8");
-//		BufferedWriter bw = new BufferedWriter(osw);
-//		PrintWriter pw = new PrintWriter(bw,true);
-//		
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("请开始输入内容");
-//		while(true) {
-//			String str = scanner.nextLine();
-//			if("exit".equals(str)) {
-//				break;
-//			}
-//			pw.println(srt);
-//			pw.close();
-//		}
+		try(
+				//低级流方向错误
+//			FileInputStream fos = new FileInputStream("pw.txt");
+			FileOutputStream fos = new FileOutputStream("pw.txt");
+			//字符集名字拼写错误
+//			OutputStreamWriter osw = new OutputStreamWriter(fos,"UFT-8");
+
+			OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
+			BufferedWriter bw = new BufferedWriter(osw);
+			PrintWriter pw = new PrintWriter(bw,true);
+
+//			PrintWriter pw = new PrintWriter("pw.txt","UTF-8");
+		) {
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("请开始输入内容");
+			while (true) {
+				String str = scanner.nextLine();
+				if ("exit".equals(str)) {
+					break;
+				}
+//				pw.println(srt);
+				pw.println(str);
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 }

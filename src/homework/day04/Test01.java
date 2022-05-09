@@ -1,4 +1,10 @@
 package homework.day04;
+
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
 /**
  * 改正下面程序的错误
  * 
@@ -12,15 +18,26 @@ package homework.day04;
  *
  */
 public class Test01 {
-//	try {
-//	FileOutputStream fos = new FileOutputStream("testpw.txt");
-//	OutputStreamWriter osw = new OutputStreamWriter(fos,"UFT-8");
-//	BufferedWriter bw = new BufferedWriter(osw);
-//	PrintWriter pw = new PrintWriter(bw);
-//	
-//	pw.println("你好!我喜欢java!");
-//	system.out.println("写出完毕!");
-//	}catch(Exception e) {
-//		System.out.println("出错了!");
-//	}
+    //缺少main方法
+    public static void main(String[] args) {
+        try (
+                FileOutputStream fos = new FileOutputStream("testpw.txt");
+                OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
+//            OutputStreamWriter osw = new OutputStreamWriter(fos,"UFT-8");
+                BufferedWriter bw = new BufferedWriter(osw);
+                PrintWriter pw = new PrintWriter(bw);
+        ){
+            pw.println("你好!我喜欢java!");
+//            system.out.println("写出完毕!");
+            System.out.println("写出完毕!");
+            /*
+                 java.io.UnsupportedEncodingException: UFT-8
+                         不支持      字符集   异常
+             */
+        }catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("出错了!");
+        }
+    }
+
 }
