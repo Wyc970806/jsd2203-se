@@ -44,6 +44,7 @@ class Shop{
                 是【同一个】才行!
              */
             synchronized (this) {
+//            synchronized ("hello") {//可以，因为字符串字面量始终是同一个对象
 //            synchronized (new Object()) {//因为每个线程到这里都要new一个对象，因此看到的并非同一个对象
                 System.out.println(t.getName() + ":正在试衣服...");
                 Thread.sleep(5000);
