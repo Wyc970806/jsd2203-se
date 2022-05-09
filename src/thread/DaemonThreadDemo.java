@@ -8,6 +8,11 @@ package thread;
  *
  * 进程结束:
  * 当一个java进程中所有普通线程都结束时，进程就会结束，此时它会强行杀死所有还在运行的守护线程。
+ *
+ *
+ * GC就是典型的运行在守护线程上的。
+ * 当我们的某个任务它需要一直运行，且当我们主要的业务都结束时它需要跟着结束，那么该任务就适合
+ * 放在守护线程上运行。
  */
 public class DaemonThreadDemo {
     public static void main(String[] args) {
@@ -24,7 +29,6 @@ public class DaemonThreadDemo {
                 System.out.println("噗通!");
             }
         };
-
         Thread jack = new Thread(){
             public void run(){
                 while(true){
@@ -41,6 +45,8 @@ public class DaemonThreadDemo {
 
         jack.setDaemon(true);
         jack.start();
+
+//        while(true);//让主线程在这里死循环
     }
 }
 
