@@ -31,10 +31,15 @@ public class SyncDemo1 {
         t2.start();
     }
 }
-
 class Table{
     private int beans = 20;//桌子上有20个豆子
-    public int getBean(){
+
+    /**
+     *  当一个方法使用synchronized关键字修饰时，该方法称为"同步方法".即:多个线程不能同时
+     *  在该方法中执行。
+     *  将并发操作改为同步操作就可有效的解决并发安全问题。
+     */
+    public synchronized int getBean(){
         if(beans==0){//桌子上没有豆子了
             throw new RuntimeException("没有豆子了!");
         }
