@@ -28,6 +28,9 @@ public class SyncDemo2 {
 }
 
 class Shop{
+    /*
+        在成员方法上使用synchronized时，同步监视器对象不可选，一定是this.
+     */
 //    public synchronized void buy(){
     public void buy(){
         try {
@@ -41,6 +44,7 @@ class Shop{
                 是【同一个】才行!
              */
             synchronized (this) {
+//            synchronized (new Object()) {//因为每个线程到这里都要new一个对象，因此看到的并非同一个对象
                 System.out.println(t.getName() + ":正在试衣服...");
                 Thread.sleep(5000);
             }
