@@ -1,9 +1,6 @@
 package socket;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -99,6 +96,15 @@ public class Server {
                 InputStream in = socket.getInputStream();
                 InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
                 BufferedReader br = new BufferedReader(isr);
+
+                /*
+                    通过socket获取输出流，用于将消息发送给客户端
+                 */
+                OutputStream out = socket.getOutputStream();
+                OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);
+                BufferedWriter bw = new BufferedWriter(osw);
+                PrintWriter pw = new PrintWriter(bw,true);
+
                 String message;
                 /*
                     使用缓冲字符输入流读取客户端发送过来一行字符串的操作，可能会因为客户端
@@ -107,6 +113,8 @@ public class Server {
                  */
                 while ((message = br.readLine()) != null) {
                     System.out.println(host + "说:" + message);
+                    //将消息发送给客户端
+                    pw.println(host + "说:" + message);
                 }
             }catch(IOException e){
             }
