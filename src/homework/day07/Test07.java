@@ -9,29 +9,54 @@ import java.util.Arrays;
  */
 public class Test07 {
     public static void main(String[] args) throws InterruptedException {
-        Goo goo = new Goo();
+        Goo goo1 = new Goo();
+        Goo goo2 = new Goo();
         Thread t1 = new Thread() {
             public void run() {
-				synchronized (goo) {
+				synchronized (goo1) {
                     for (int i = 0; i < 100; i++) {
-                        goo.array = Arrays.copyOf(goo.array, goo.array.length + 1);
-                        goo.array[goo.array.length - 1] = i;
+                        goo1.array = Arrays.copyOf(goo1.array, goo1.array.length + 1);
+                        goo1.array[goo1.array.length - 1] = i;
                     }
 				}
             }
         };
         Thread t2 = new Thread() {
             public void run() {
-				synchronized (goo) {
+				synchronized (goo1) {
                     for (int i = 100; i < 200; i++) {
-                        goo.array = Arrays.copyOf(goo.array, goo.array.length + 1);
-                        goo.array[goo.array.length - 1] = i;
+                        goo1.array = Arrays.copyOf(goo1.array, goo1.array.length + 1);
+                        goo1.array[goo1.array.length - 1] = i;
                     }
 				}
             }
         };
+
+        Thread t3 = new Thread() {
+            public void run() {
+                synchronized (goo2) {
+                    for (int i = 0; i < 100; i++) {
+                        goo2.array = Arrays.copyOf(goo2.array, goo2.array.length + 1);
+                        goo2.array[goo2.array.length - 1] = i;
+                    }
+                }
+            }
+        };
+        Thread t4 = new Thread() {
+            public void run() {
+                synchronized (goo2) {
+                    for (int i = 100; i < 200; i++) {
+                        goo2.array = Arrays.copyOf(goo2.array, goo2.array.length + 1);
+                        goo2.array[goo2.array.length - 1] = i;
+                    }
+                }
+            }
+        };
+
         t1.start();
         t2.start();
+        t3.start();
+        t4.start();
         /*
          * 多执行几次，检查程序可能存在的问题，并尝试自己
          * 分析为什么会出现这些情况?
