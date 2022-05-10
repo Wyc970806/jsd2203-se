@@ -42,7 +42,6 @@ public class Client {
             e.printStackTrace();
         }
     }
-
     public void start(){
         try {
             ServerHandler serverHandler = new ServerHandler();

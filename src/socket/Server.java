@@ -93,6 +93,7 @@ public class Server {
         }
 
         public void run(){
+            PrintWriter pw = null;
             try{
                 /*
                 通过Socket的方法
@@ -109,7 +110,7 @@ public class Server {
                 OutputStream out = socket.getOutputStream();
                 OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);
                 BufferedWriter bw = new BufferedWriter(osw);
-                PrintWriter pw = new PrintWriter(bw,true);
+                pw = new PrintWriter(bw,true);
 
                 //将对应该客户端的输出流存入allOut数组,便于其它ClientHandler广播消息给当前客户端
                 //1对allOut数组扩容
@@ -133,6 +134,19 @@ public class Server {
                     }
                 }
             }catch(IOException e){
+
+            }finally{
+                //处理该客户端断开链接后的操作
+
+                //将对应当前客户端的输出流从共享数组allOut中删除
+
+
+                try {
+                    //关闭socket，释放底层资源
+                    socket.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
