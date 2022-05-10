@@ -45,6 +45,13 @@ public class Client {
 
     public void start(){
         try {
+            ServerHandler serverHandler = new ServerHandler();
+            Thread t = new Thread(serverHandler);
+            t.setDaemon(true);
+            t.start();
+
+
+
             /*
                 Socket提供的方法:
                 OutputStream getOutputStream()
@@ -52,21 +59,11 @@ public class Client {
                 建立连接的远端计算机。而对方也可以通过建立连接的Socket获取输入流
                 读取到我们写出的字节。
              */
-
             //低级流，通过该流写出的字节就发送给了远端计算机
             OutputStream out = socket.getOutputStream();
             OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);
             BufferedWriter bw = new BufferedWriter(osw);
             PrintWriter pw = new PrintWriter(bw,true);
-
-            /*
-                通过socket获取输入流，读取服务端发送过来的消息
-             */
-            InputStream in = socket.getInputStream();
-            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-            BufferedReader br = new BufferedReader(isr);
-
-
 
             Scanner scanner = new Scanner(System.in);
             while(true){
@@ -75,10 +72,6 @@ public class Client {
                     break;//停止循环
                 }
                 pw.println(line);//将输入的内容发送给服务端
-
-                //读取服务端发送过来的一行字符串
-                line = br.readLine();
-                System.out.println(line);
             }
 
         } catch (IOException e) {
@@ -102,6 +95,29 @@ public class Client {
         Client client = new Client();
         client.start();
     }
+
+    private class ServerHandler implements Runnable{
+        public void run() {
+            try{
+                  /*
+                    通过socket获取输入流，读取服务端发送过来的消息
+                 */
+                InputStream in = socket.getInputStream();
+                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+                BufferedReader br = new BufferedReader(isr);
+
+                String message;
+                while((message = br.readLine()) != null){
+                    System.out.println(message);
+                }
+
+            }catch(IOException e){
+
+            }
+        }
+    }
+
+
 }
 
 
