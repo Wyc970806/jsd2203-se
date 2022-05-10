@@ -120,7 +120,7 @@ public class Server {
 
 
                 //广播该客户端上线了
-                sendMessage(host + "上线了，当前现在人数:" + allOut.length);
+                sendMessage(host + "上线了，当前在线人数:" + allOut.length);
 
 
                 String message;
@@ -149,7 +149,7 @@ public class Server {
                 }
 
                 //广播该客户端下线了
-                sendMessage(host + "下线了，当前现在人数:" + allOut.length);
+                sendMessage(host + "下线了，当前在线人数:" + allOut.length);
 
                 try {
                     //关闭socket，释放底层资源
