@@ -111,13 +111,26 @@ public class Server {
                 OutputStreamWriter osw = new OutputStreamWriter(out, StandardCharsets.UTF_8);
                 BufferedWriter bw = new BufferedWriter(osw);
                 pw = new PrintWriter(bw,true);
+                /*
+                    this不可以，因为这里的this是ClientHandler的实例，而每个线程都有自己的任务(不同的
+                    ClientHandler实例.)因此多个线程看到的ClientHandler并非同一个对象。
+                 */
+//                synchronized (this) {
+                /*
+                    通常情况下，同步监视器对象可以选择临界资源本身，即:多个线程抢谁，就锁谁。
 
-                //将对应该客户端的输出流存入allOut数组,便于其它ClientHandler广播消息给当前客户端
-                //1对allOut数组扩容
-                allOut = Arrays.copyOf(allOut,allOut.length+1);
-                //2将输出流存入数组最后一个位置
-                allOut[allOut.length-1] = pw;
+                    虽然本案例中allOut是临界资源,但是这里不能使用它作为同步监视器对象，主要原因是:
+                    同步块中有对该数组扩容这类操作，这会导致allOut对象在一直发生改变。
+                 */
+//                synchronized (allOut) {
 
+                synchronized (Server.this) {
+                    //将对应该客户端的输出流存入allOut数组,便于其它ClientHandler广播消息给当前客户端
+                    //1对allOut数组扩容
+                    allOut = Arrays.copyOf(allOut, allOut.length + 1);
+                    //2将输出流存入数组最后一个位置
+                    allOut[allOut.length - 1] = pw;
+                }
 
                 //广播该客户端上线了
                 sendMessage(host + "上线了，当前在线人数:" + allOut.length);
@@ -140,14 +153,15 @@ public class Server {
                 //处理该客户端断开链接后的操作
 
                 //将对应当前客户端的输出流从共享数组allOut中删除
-                for(int i=0;i<allOut.length;i++){
-                    if(allOut[i]==pw){
-                        allOut[i] = allOut[allOut.length-1];
-                        allOut = Arrays.copyOf(allOut,allOut.length-1);
-                        break;
+                synchronized (Server.this) {
+                    for (int i = 0; i < allOut.length; i++) {
+                        if (allOut[i] == pw) {
+                            allOut[i] = allOut[allOut.length - 1];
+                            allOut = Arrays.copyOf(allOut, allOut.length - 1);
+                            break;
+                        }
                     }
                 }
-
                 //广播该客户端下线了
                 sendMessage(host + "下线了，当前在线人数:" + allOut.length);
 
@@ -165,8 +179,11 @@ public class Server {
          * @param message
          */
         public void sendMessage(String message){
-            for(int i=0;i<allOut.length;i++) {
-                allOut[i].println(message);
+            //这里添加synchronized的目的是为了和上面的增删数组元素互斥，避免遍历出错
+            synchronized (Server.this) {
+                for (int i = 0; i < allOut.length; i++) {
+                    allOut[i].println(message);
+                }
             }
         }
     }
