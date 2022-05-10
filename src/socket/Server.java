@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 /**
  * 聊天室服务端
@@ -18,6 +19,11 @@ public class Server {
         ServerSocket比作"总机"
      */
     private ServerSocket serverSocket;
+    /*
+        该数组里存放所有给所有客户端发消息的输出流，用于广播消息
+     */
+    private PrintWriter[] allOut = {};
+
 
     public Server(){
         try {
@@ -105,6 +111,14 @@ public class Server {
                 BufferedWriter bw = new BufferedWriter(osw);
                 PrintWriter pw = new PrintWriter(bw,true);
 
+                //将对应该客户端的输出流存入allOut数组,便于其它ClientHandler广播消息给当前客户端
+                //1对allOut数组扩容
+                allOut = Arrays.copyOf(allOut,allOut.length+1);
+                //2将输出流存入数组最后一个位置
+                allOut[allOut.length-1] = pw;
+
+
+
                 String message;
                 /*
                     使用缓冲字符输入流读取客户端发送过来一行字符串的操作，可能会因为客户端
@@ -113,8 +127,10 @@ public class Server {
                  */
                 while ((message = br.readLine()) != null) {
                     System.out.println(host + "说:" + message);
-                    //将消息发送给客户端
-                    pw.println(host + "说:" + message);
+                    //遍历allOut数组中所有输出流，将消息发送给所有客户端
+                    for(int i=0;i<allOut.length;i++) {
+                        allOut[i].println(host + "说:" + message);
+                    }
                 }
             }catch(IOException e){
             }
