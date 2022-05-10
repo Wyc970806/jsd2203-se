@@ -119,6 +119,9 @@ public class Server {
                 allOut[allOut.length-1] = pw;
 
 
+                //广播该客户端上线了
+                sendMessage(host + "上线了，当前现在人数:" + allOut.length);
+
 
                 String message;
                 /*
@@ -129,9 +132,7 @@ public class Server {
                 while ((message = br.readLine()) != null) {
                     System.out.println(host + "说:" + message);
                     //遍历allOut数组中所有输出流，将消息发送给所有客户端
-                    for(int i=0;i<allOut.length;i++) {
-                        allOut[i].println(host + "说:" + message);
-                    }
+                    sendMessage(host + "说:" + message);
                 }
             }catch(IOException e){
 
@@ -147,12 +148,25 @@ public class Server {
                     }
                 }
 
+                //广播该客户端下线了
+                sendMessage(host + "下线了，当前现在人数:" + allOut.length);
+
                 try {
                     //关闭socket，释放底层资源
                     socket.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+
+        /**
+         * 广播消息给所有客户端
+         * @param message
+         */
+        public void sendMessage(String message){
+            for(int i=0;i<allOut.length;i++) {
+                allOut[i].println(message);
             }
         }
     }
