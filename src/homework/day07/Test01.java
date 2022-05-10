@@ -9,12 +9,14 @@ package homework.day07;
 public class Test01 {
 	public static void main(String[] args) {
 		MyRunnable run = new MyRunnable();
-		Thread t = new Thread();
+//		Thread t = new Thread();
+		Thread t = new Thread(run);//需要将任务传入给线程
 		t.start();
 	}
 }
-
-class MyRunnable{
+//没有实现Runnable接口
+//class MyRunnable{
+class MyRunnable implements Runnable{
 	public void run() {
 		for(int i=0;i<100;i++) {
 			System.out.println("你好!");

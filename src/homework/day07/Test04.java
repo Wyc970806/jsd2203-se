@@ -26,7 +26,9 @@ public class Test04 {
 class Boo{
 	public void dosome() {
 		Thread t = Thread.currentThread();
-		synchronized (t) {
+        //t表示的是执行dosome方法的线程，因此T1和T2执行是这个t就是T1和T2，因此看到的并非同一个对象
+//		synchronized (t) {
+        synchronized (this) {
 			try {
 				System.out.println(t.getName()+":正在执行dosome方法...");
 				Thread.sleep(5000);

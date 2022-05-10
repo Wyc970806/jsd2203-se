@@ -12,22 +12,22 @@ public class Test06 {
 	public static void main(String[] args) throws InterruptedException {
 		Thread t1 = new Thread() {
 			public void run() {
-//				synchronized (?) {
+				synchronized (Test06.class) {
 					for(int i=0;i<100;i++) {
 						array = Arrays.copyOf(array, array.length+1);
 						array[array.length-1]=i;
 					}
-//				}
+				}
 			}
 		};
 		Thread t2 = new Thread() {
 			public void run() {
-//				synchronized (?) {
+				synchronized (Test06.class) {
 					for(int i=100;i<200;i++) {
 						array = Arrays.copyOf(array, array.length+1);
 						array[array.length-1]=i;
 					}
-//				}
+				}
 			}
 		};
 		t1.start();

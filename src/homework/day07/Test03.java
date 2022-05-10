@@ -17,8 +17,15 @@ import java.util.Date;
  */
 public class Test03 {
 	public static void main(String[] args) {
-		//首先运行，查看Date输出
-		Date now = new Date();
-		System.out.println(now);
+		while(true) {
+			//首先运行，查看Date输出
+			Date now = new Date();
+			System.out.println(now);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

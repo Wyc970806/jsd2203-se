@@ -12,22 +12,22 @@ public class Test07 {
         Goo goo = new Goo();
         Thread t1 = new Thread() {
             public void run() {
-//				synchronized (?) {
-                for (int i = 0; i < 100; i++) {
-                    goo.array = Arrays.copyOf(goo.array, goo.array.length + 1);
-                    goo.array[goo.array.length - 1] = i;
-                }
-//				}
+				synchronized (goo) {
+                    for (int i = 0; i < 100; i++) {
+                        goo.array = Arrays.copyOf(goo.array, goo.array.length + 1);
+                        goo.array[goo.array.length - 1] = i;
+                    }
+				}
             }
         };
         Thread t2 = new Thread() {
             public void run() {
-//				synchronized (?) {
-                for (int i = 100; i < 200; i++) {
-                    goo.array = Arrays.copyOf(goo.array, goo.array.length + 1);
-                    goo.array[goo.array.length - 1] = i;
-                }
-//				}
+				synchronized (goo) {
+                    for (int i = 100; i < 200; i++) {
+                        goo.array = Arrays.copyOf(goo.array, goo.array.length + 1);
+                        goo.array[goo.array.length - 1] = i;
+                    }
+				}
             }
         };
         t1.start();
