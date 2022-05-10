@@ -66,8 +66,8 @@ public class Test07 {
          * 的位置无所谓，毕竟是并发的。
          */
         Thread.sleep(1000);//阻塞1秒是等待上面两个线程干完活
-        System.out.println(goo.array.length);
-        System.out.println(Arrays.toString(goo.array));
+        System.out.println(goo1.array.length);
+        System.out.println(Arrays.toString(goo1.array));
     }
 }
 class Goo{
