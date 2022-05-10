@@ -139,7 +139,13 @@ public class Server {
                 //处理该客户端断开链接后的操作
 
                 //将对应当前客户端的输出流从共享数组allOut中删除
-
+                for(int i=0;i<allOut.length;i++){
+                    if(allOut[i]==pw){
+                        allOut[i] = allOut[allOut.length-1];
+                        allOut = Arrays.copyOf(allOut,allOut.length-1);
+                        break;
+                    }
+                }
 
                 try {
                     //关闭socket，释放底层资源
