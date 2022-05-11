@@ -29,7 +29,6 @@ public class IteratorDemo {
         c.add("four");
         c.add("five");
         System.out.println(c);
-
         Iterator it = c.iterator();
         /*
             boolean hasNext()
