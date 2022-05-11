@@ -51,7 +51,12 @@ public class IteratorDemo {
                 的方法增删元素，否则会抛出异常:java.util.ConcurrentModificationException
              */
             if("#".equals(str)){
-                c.remove(str);
+//                c.remove(str);
+                /*
+                    迭代器也提供了remove方法，从集合中删除迭代器当前位置对应的元素
+                    即：next方法获取的元素
+                 */
+                it.remove();
             }
             System.out.println(str);
         }
