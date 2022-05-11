@@ -1,6 +1,7 @@
 package collection;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -63,5 +64,10 @@ public class ListDemo1 {
 
         System.out.println(list);//[five,four,six,two,one]
 
+        Collections.reverse(list);
+        System.out.println(list);
+
+//        Collections.shuffle(list);
+//        System.out.println(list);
     }
 }
