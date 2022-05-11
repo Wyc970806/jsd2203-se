@@ -4,7 +4,9 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 /**
  * 聊天室服务端
@@ -22,8 +24,8 @@ public class Server {
     /*
         该数组里存放所有给所有客户端发消息的输出流，用于广播消息
      */
-    private PrintWriter[] allOut = {};
-
+//    private PrintWriter[] allOut = {};
+    private Collection<PrintWriter> allOut = new ArrayList<>();
 
     public Server(){
         try {
@@ -124,16 +126,22 @@ public class Server {
                  */
 //                synchronized (allOut) {
 
-                synchronized (Server.this) {
-                    //将对应该客户端的输出流存入allOut数组,便于其它ClientHandler广播消息给当前客户端
-                    //1对allOut数组扩容
-                    allOut = Arrays.copyOf(allOut, allOut.length + 1);
-                    //2将输出流存入数组最后一个位置
-                    allOut[allOut.length - 1] = pw;
+//                synchronized (Server.this) {
+//                    //将对应该客户端的输出流存入allOut数组,便于其它ClientHandler广播消息给当前客户端
+//                    //1对allOut数组扩容
+//                    allOut = Arrays.copyOf(allOut, allOut.length + 1);
+//                    //2将输出流存入数组最后一个位置
+//                    allOut[allOut.length - 1] = pw;
+//                }
+
+                //同步监视器对象可以直接用集合allOut,因为增删元素集合对象本身没变
+                synchronized (allOut) {
+                    allOut.add(pw);
                 }
 
                 //广播该客户端上线了
-                sendMessage(host + "上线了，当前在线人数:" + allOut.length);
+//                sendMessage(host + "上线了，当前在线人数:" + allOut.length);
+                sendMessage(host + "上线了，当前在线人数:" + allOut.size());
 
 
                 String message;
@@ -153,17 +161,23 @@ public class Server {
                 //处理该客户端断开链接后的操作
 
                 //将对应当前客户端的输出流从共享数组allOut中删除
-                synchronized (Server.this) {
-                    for (int i = 0; i < allOut.length; i++) {
-                        if (allOut[i] == pw) {
-                            allOut[i] = allOut[allOut.length - 1];
-                            allOut = Arrays.copyOf(allOut, allOut.length - 1);
-                            break;
-                        }
-                    }
+//                synchronized (Server.this) {
+//                    for (int i = 0; i < allOut.length; i++) {
+//                        if (allOut[i] == pw) {
+//                            allOut[i] = allOut[allOut.length - 1];
+//                            allOut = Arrays.copyOf(allOut, allOut.length - 1);
+//                            break;
+//                        }
+//                    }
+//                }
+
+                synchronized (allOut) {
+                    allOut.remove(pw);
                 }
+
                 //广播该客户端下线了
-                sendMessage(host + "下线了，当前在线人数:" + allOut.length);
+//                sendMessage(host + "下线了，当前在线人数:" + allOut.length);
+                sendMessage(host + "下线了，当前在线人数:" + allOut.size());
 
                 try {
                     //关闭socket，释放底层资源
@@ -180,9 +194,9 @@ public class Server {
          */
         public void sendMessage(String message){
             //这里添加synchronized的目的是为了和上面的增删数组元素互斥，避免遍历出错
-            synchronized (Server.this) {
-                for (int i = 0; i < allOut.length; i++) {
-                    allOut[i].println(message);
+            synchronized (allOut) {
+                for (PrintWriter pw : allOut) {
+                    pw.println(message);
                 }
             }
         }
