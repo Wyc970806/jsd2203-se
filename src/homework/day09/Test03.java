@@ -1,4 +1,10 @@
 package homework.day09;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
 /**
  * 生成10个0-100之间的不重复的随机数,并输出
  * @author Xiloer
@@ -6,6 +12,11 @@ package homework.day09;
  */
 public class Test03 {
 	public static void main(String[] args) {
-		
+		Collection<Integer> set = new HashSet<>();
+		Random random = new Random();
+		while(set.size()<10){
+			set.add(random.nextInt(100));
+		}
+		System.out.println(set);
 	}
 }

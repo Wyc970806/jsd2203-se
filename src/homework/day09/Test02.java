@@ -1,5 +1,8 @@
 package homework.day09;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * 改错题
  * @author Xiloer
@@ -7,16 +10,19 @@ package homework.day09;
  */
 public class Test02 {
 //	public static void mian(String args) {
+    public static void main(String[] args) {
+	    //语法错误，缺少()
 //		Collection<String> c = new ArrayList;
-//		c.add("one");
-//		c.add("two");
-//		c.add("three");
-//		c.add("four");
-//		c.add("five");
-//		for(String s : c) {
-//			System.out.println(s);
-//		}
-//	}
+        Collection<String> c = new ArrayList();
+		c.add("one");
+		c.add("two");
+		c.add("three");
+		c.add("four");
+		c.add("five");
+		for(String s : c) {
+			System.out.println(s);
+		}
+	}
 }
 
 

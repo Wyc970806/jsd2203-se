@@ -1,4 +1,9 @@
 package homework.day09;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * 将整数1-100存入一个List集合中并输出
  * 之后将集合中40-60的元素翻转后并输出
@@ -7,5 +12,17 @@ package homework.day09;
  *
  */
 public class Test04 {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        for(int i=1;i<=100;i++){
+            list.add(i);
+        }
+        System.out.println(list);
+
+        List<Integer> subList = list.subList(39,60);
+        Collections.reverse(subList);
+
+        System.out.println(list);
+    }
 
 }
