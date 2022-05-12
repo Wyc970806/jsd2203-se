@@ -32,6 +32,12 @@ public class SortListDemo3 {
 //        Collections.sort(list);
 
         //按照字数的多少排序
+//        Collections.sort(list,(s1,s2)->s1.length()-s2.length());
+
+        /*
+            JDK8之后List集合本身也提供了sort方法，可以直接排序当前集合。
+         */
+        list.sort((s1,s2)->s1.length()-s2.length());
 
         System.out.println(list);
 
