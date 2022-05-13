@@ -1,7 +1,9 @@
 package map;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 /**
@@ -39,11 +41,22 @@ public class MapDemo2 {
             集合后将其返回
             Entry是Map的内部接口，每一个Entry实例应当表示Map中的一组键值对。
          */
-        Set<Map.Entry<String,Integer>> entrySet = map.entrySet();
-        for(Map.Entry<String,Integer> entry: entrySet){
+        Set<Entry<String,Integer>> entrySet = map.entrySet();
+        for(Entry<String,Integer> entry: entrySet){
             String key = entry.getKey();
             Integer value = entry.getValue();
             System.out.println(key+":"+value);
         }
+
+        /*
+            遍历所有的value
+            Collection values()
+            该方法会将当前Map中所有的value以一个集合形式返回。
+         */
+        Collection<Integer> values = map.values();
+        for(Integer value : values){
+            System.out.println("value:"+value);
+        }
+
     }
 }
