@@ -45,6 +45,32 @@ public class MapDemo {
          */
         value = map.get("数学");
         System.out.println(value);
+        value = map.get("体育");
+        System.out.println(value);//null
+
+        /*
+            int size()
+            返回当前Map的元素个数，每一组键值对算是一个元素
+         */
+        int size = map.size();
+        System.out.println("size:"+size);
+
+//        map.clear();//清空Map
+
+        /*
+            boolean containsKey(Object key)
+            判断当前Map是否包含给定的key
+
+            boolean containsValue(Value value)
+            判断当前Map是否包含给定的value
+         */
+//        boolean ck = map.containsKey("化学");
+        boolean ck = map.containsKey("体育");
+        System.out.println("包含key:"+ck);
+
+        boolean cv = map.containsValue(98);
+        System.out.println("包含value:"+cv);
+
 
 
 
