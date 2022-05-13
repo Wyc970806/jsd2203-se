@@ -34,12 +34,17 @@ public class MapDemo {
         map.put("物理",96);
         map.put("化学",99);
         System.out.println(map);
-
         value = map.put("英语",60);//替换英语原来的值97
         System.out.println(value);//97
         System.out.println(map);
 
-
+        /*
+            V get(Object key)
+            根据给定的key获取对应的value。
+            如果给定的key不存在则返回值为null。
+         */
+        value = map.get("数学");
+        System.out.println(value);
 
 
 
