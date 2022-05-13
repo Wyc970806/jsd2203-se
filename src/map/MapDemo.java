@@ -47,7 +47,7 @@ public class MapDemo {
         System.out.println(value);
         value = map.get("体育");
         /*
-            如果Map的value是包装类类型，当我们回去value值时，也一定使用包装类
+            如果Map的value是包装类类型，当我们获取value值时，也一定使用包装类
             类型的变量去接收返回值。避免使用基本类型。因为这可能导致触发自动拆箱
             特性。如果返回值为null导致自动拆箱出现空指针异常
             int value1 = map.get("体育");
