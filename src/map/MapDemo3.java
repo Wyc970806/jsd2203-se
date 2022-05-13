@@ -2,6 +2,8 @@ package map;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -43,6 +45,16 @@ public class MapDemo3 {
          */
 //        c.forEach(e->System.out.println(e));
         c.forEach(System.out::println);
+
+
+        Map<String,Integer> map = new HashMap<>();
+        map.put("语文",99);
+        map.put("数学",98);
+        map.put("英语",97);
+        map.put("物理",96);
+        map.put("化学",99);
+
+        map.forEach((k,v)->System.out.println(k+":"+v));
 
 
     }

@@ -81,6 +81,15 @@ public class MapDemo {
         boolean cv = map.containsValue(98);
         System.out.println("包含value:"+cv);
 
+        System.out.println(map);
+        /*
+            V remove(Object key)
+            从Map中删除给定的key所对应的键值对。返回值为这个key对应的value
+            如果给定的key在Map中不存在，则没有任何效果。返回值也为null。
+         */
+        value = map.remove("数学");
+        System.out.println(value);
+        System.out.println(map);
 
 
 
