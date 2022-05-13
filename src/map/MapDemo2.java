@@ -2,6 +2,7 @@ package map;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Map的遍历
@@ -20,6 +21,15 @@ public class MapDemo2 {
         map.put("化学",99);
         System.out.println(map);
 
-
+        /*
+            遍历所有的key
+            Set keySet()
+            将当前Map中所有的key以一个Set集合形式返回。
+            遍历该集合等于遍历了所有的key
+         */
+        Set<String> keySet = map.keySet();
+        for(String key : keySet){
+            System.out.println("key:"+key);
+        }
     }
 }
