@@ -2,6 +2,7 @@ package reflect;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *  JAVA Reflect 反射机制
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  *  反射机制可以提高代码的灵活度，但同时带来了更多的资源开销和较慢的运行效率，因此不能过度依赖。
  */
 public class ReflectDemo1 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
        /*
             反射机制第一步:在程序运行期间获取要操作的类的类对象。
             类对象:Class类的实例
@@ -33,7 +34,19 @@ public class ReflectDemo1 {
 
         //获取String的类对象
 //        Class cls = String.class;
-        Class cls = ArrayList.class;
+//        Class cls = ArrayList.class;
+//        Class cls = Person.class;
+
+//        Class cls = Class.forName("java.lang.String");
+//        Class cls = Class.forName("java.util.ArrayList");
+//        Class cls = Class.forName("reflect.Person");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入一个类名:");
+        String className = scanner.nextLine();
+        Class cls = Class.forName(className);
+
+
 
         //获取类名
         String name = cls.getName();//获取完全限定名
