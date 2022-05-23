@@ -1,6 +1,7 @@
 package reflect;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 /**
  *  JAVA Reflect 反射机制
@@ -31,7 +32,9 @@ public class ReflectDemo1 {
         */
 
         //获取String的类对象
-        Class cls = String.class;
+//        Class cls = String.class;
+        Class cls = ArrayList.class;
+
         //获取类名
         String name = cls.getName();//获取完全限定名
         System.out.println(name);
