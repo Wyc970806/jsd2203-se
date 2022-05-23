@@ -1,10 +1,12 @@
 package reflect;
 
+import java.lang.reflect.Method;
+
 /**
  * 自动调用Person类中所有以s开头的无参方法
  */
 public class Test1 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         /*
             提示:
             Method类上有一个方法:
@@ -22,5 +24,16 @@ public class Test1 {
                    getParameterCount()
                    invoke()
          */
+        Class cls = Class.forName("reflect.Person");
+        Object obj = cls.newInstance();
+
+        Method[] methods = cls.getDeclaredMethods();
+        for(Method method : methods){
+            if(method.getName().startsWith("s")&&
+                method.getParameterCount()==0){
+                method.invoke(obj);
+            }
+        }
+
     }
 }
