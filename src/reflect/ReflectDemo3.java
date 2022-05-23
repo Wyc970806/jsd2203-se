@@ -24,7 +24,7 @@ public class ReflectDemo3 {
             java.lang.reflect.Constructor构造器对象，该类的每一个实例表示一个构造器
          */
         //获取 Person(String,int)
-        Constructor c = cls.getConstructor(String.class,int.class);
+        Constructor c = cls.getConstructor(String.class,int.class);//这里传入每个参数类型对应的类对象
 
         //3利用构造器实例化对象
         Object obj = c.newInstance("王五",33);//new Person("王五",33);
