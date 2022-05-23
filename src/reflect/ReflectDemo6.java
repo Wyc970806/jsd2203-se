@@ -9,7 +9,6 @@ public class ReflectDemo6 {
 
         Class cls = Class.forName("reflect.Person");
         Object obj = cls.newInstance();
-
         //获取heihei方法
         /*
             通过Class的方法:
