@@ -40,6 +40,10 @@ public class Person {
         }
     }
 
+    private void heihei(){
+        System.out.println("我是Person的私有方法!!!!!!!!!!!!!");
+    }
+
 
 
     public String getName() {
