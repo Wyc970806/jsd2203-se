@@ -1,7 +1,9 @@
 package reflect;
 
+import java.lang.reflect.Method;
+
 /**
- *  JAVA 反射机制
+ *  JAVA Reflect 反射机制
  *  反射是java的动态机制，允许我们在程序[运行期间]再确定对象的实例化，属性的操作，方法的调用等。
  *  反射机制可以提高代码的灵活度，但同时带来了更多的资源开销和较慢的运行效率，因此不能过度依赖。
  */
@@ -28,6 +30,29 @@ public class ReflectDemo1 {
             3:ClassLoader方式加载
         */
 
+        //获取String的类对象
+        Class cls = String.class;
+        //获取类名
+        String name = cls.getName();//获取完全限定名
+        System.out.println(name);
+
+        name = cls.getSimpleName();//仅获取类名
+        System.out.println(name);
+
+        //获取包名
+        String packageName = cls.getPackage().getName();
+        System.out.println(packageName);
+        /*
+            Class称为类对象
+
+            Method称为方法对象，该类的每一个实例用于表示一个方法，该对象上记录这其表示的方法里的所有信息
+            如:方法的访问修饰符，返回值类型，方法名，参数列表信息等。
+         */
+        Method[] methods = cls.getMethods();
+        for(Method method : methods){
+            String methodName = method.getName();//获取方法名
+            System.out.println(methodName);
+        }
 
     }
 
