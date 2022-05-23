@@ -13,6 +13,9 @@ public class ArgsDemo {
         dosome("1","2");//dosome(new String[]{"1","2"})
         dosome("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16");//dosome(new String[]{"1","2",..."16"})
     }
+    /*
+        变长参数有一个要求:只能作为方法的最后一个参数使用！
+     */
     public static void dosome(String... s){
 //    public static void dosome(String[] s){//编译后s是一个数组
 
