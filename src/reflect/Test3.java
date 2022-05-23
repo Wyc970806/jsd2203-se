@@ -60,6 +60,17 @@ public class Test3 {
             String className = fileName.substring(0,fileName.indexOf("."));
             //因为扫描的是与Test3所在包中的其他类,特点就是这些类的包名与Test3包名一致
             Class cls = Class.forName(Test3.class.getPackage().getName()+"."+className);
+            /*
+                如果当前类包名:package reflect;
+                Test3.class.getPackage().getName()==>"reflect"
+                dir.getName()==>"reflect"
+
+                如果当前类包名:package com.webserver.core
+                Test3.class.getPackage().getName()==>"com.webserver.core"
+                dir.getName()==>"core"
+
+             */
+            //Class cls = Class.forName(dir.getName()+"."+className);//不行！！！
             Object o = cls.newInstance();
 
             Method[] methods = cls.getDeclaredMethods();
