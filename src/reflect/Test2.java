@@ -35,12 +35,11 @@ public class Test2 {
 //            System.out.println(file.getName());
             //通过文件名截取类名
             String fileName = file.getName();//文件名
-            String className = fileName.substring(0,fileName.indexOf("."));
+            String className = fileName.substring(0,fileName.indexOf("."));// fileName.split("\\.")
 //            System.out.println(className);
             //加载类对象
             Class cls = Class.forName("reflect."+className);
             Object o = cls.newInstance();
-
             Method[] methods = cls.getDeclaredMethods();
             for(Method method : methods){
                 if(method.getName().startsWith("s")&&method.getParameterCount()==0){
