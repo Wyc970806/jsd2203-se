@@ -17,7 +17,7 @@ public class Person {
         this.age = age;
     }
 
-    @AutoRunMethod
+    @AutoRunMethod(7)
     public void sayHello(){
         System.out.println(name+":Hello!");
     }
