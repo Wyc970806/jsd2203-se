@@ -17,7 +17,7 @@ public class Person {
         this.age = age;
     }
 
-    @AutoRunMethod(7)
+    @AutoRunMethod(5)
     public void sayHello(){
         System.out.println(name+":Hello!");
     }
@@ -26,7 +26,7 @@ public class Person {
         System.out.println(name+":Hi!");
     }
 
-    @AutoRunMethod
+    @AutoRunMethod(8)
     public void watchTV(){
         System.out.println(name+":正在看电视");
     }
