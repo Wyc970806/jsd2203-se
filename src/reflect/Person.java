@@ -3,7 +3,10 @@ package reflect;
 /**
  * 使用当前类测试反射机制
  */
+
+@AutoRunClass
 public class Person {
+
     private String name = "张三";
     private int age = 22;
 
