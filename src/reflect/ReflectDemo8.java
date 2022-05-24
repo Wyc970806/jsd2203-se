@@ -11,7 +11,7 @@ public class ReflectDemo8 {
         /*
             实际上除了Class之外，其他几个反射对象:
             Method,Constructor,Field等都有这个方法:boolean isAnnotationPresent(Class cls)
-            用于判断:方法，构造器，属性等是否又被某个特定的构造器标注
+            用于判断:方法，构造器，属性等是否又被某个特定的注解标注
          */
         //当前Person类是否被注解@AutoRunClass标注了?
         boolean mark = cls.isAnnotationPresent(AutoRunClass.class);
