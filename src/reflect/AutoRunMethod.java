@@ -33,7 +33,7 @@ public @interface AutoRunMethod {
         此时使用当前注解并传参时应当写为:
         @AutoRunMethod(count=2)
 
-        两个异常参数时，无论哪个参数的名字叫value都要用name=value的格式传递参数。
+        两个以上参数时，无论哪个参数的名字叫value都要用name=value的格式传递参数。
         例如当前注解定义了两个参数:
         int count();
         String name();
